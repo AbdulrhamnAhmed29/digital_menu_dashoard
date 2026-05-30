@@ -41,11 +41,11 @@ const Header = () => {
                                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                         className="absolute inset-0 bg-orange-500 rounded-2xl blur-xl"
                                     />
-                                    <div className="relative h-14 w-14 md:h-16 md:w-16 p-2.5 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-zinc-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.6)] overflow-hidden active:scale-95 transition-all duration-300 group-hover:border-orange-500/40">
+                                    <div className="w-16 h-16 flex-shrink-0 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-xl p-1.5 border border-white/10 shadow-inner">
                                         <img
                                             src="/images/logo.png"
-                                            className="w-full h-full object-contain transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 ease-out"
-                                            alt={`${APP_NAME} Logo`}
+                                            alt="بيتزا كينج لوجو"
+                                            className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(251,146,60,0.2)]"
                                         />
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@ const Header = () => {
                     />
                 </div>
 
-              
+
 
             </div>
         </header>
