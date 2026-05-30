@@ -44,7 +44,7 @@ const Sidebar = () => {
                 ref={sidebarRef}
                 dir="rtl"
                 className={`${isOpen ? 'w-64' : 'w-20'} 
-                bg-[#0a0a0a] h-screen transition-all duration-300 flex flex-col fixed right-0 top-0 z-40 
+                bg-black h-screen transition-all duration-300 flex flex-col fixed right-0 top-0 z-40 
                 shadow-[10px_0_30px_rgba(0,0,0,0.5)] border-l border-white/5`}
             >
                 {/* الهيدر (اللوجو واسم المطعم) */}
