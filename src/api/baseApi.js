@@ -2,7 +2,7 @@ import api from './axiosConfig'
 
 const BaseApi = {
   getAll: async (resource, params = {}) => {
-    const { data } = await api.get(resource, { params })
+    const  data  = await api.get(resource, { params })
     return data
   },
 
