@@ -6,16 +6,12 @@ export const useCategories = () => {
         queryKey: ["categories"],
         queryFn: () => fetchCategories.getCategories()
     });
+    
 
-    const { data: sections } = useQuery({
-        queryKey: ["sections"],
-        queryFn: fetchCategories.getSections
-    })
+
     return {
         categories: categories,
-        sections: sections,
         isError: error,
         isLoading:isLoading
-
     }
 }

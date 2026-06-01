@@ -1,13 +1,14 @@
 import { lazy } from 'react'
-import MainLayout from './layout/MainLayout' // تأكد من المسار الصحيح
+import MainLayout from './layout/MainLayout'
 
 const SignIn = lazy(() => import('./features/auth/components/SignIn'));
-const Products = lazy(() => import('./pages/Products')); // مثال
-const Categories = lazy(() => import('./pages/Categories')); // مثال
-const Sections = lazy(() => import('./pages/Sections'));
-const Offers = lazy(() => import('./pages/Offers')); // مثال
+const Products = lazy(() => import('./pages/Products'));
+const Categories = lazy(() => import('./pages/Sections'));
+const sectionDetails = lazy(() => import('./pages/SectionDetails'));
+
+const Offers = lazy(() => import('./pages/Offers'));
 const finance = lazy(() => import('./pages/Finance'));
- // مثال
+
 
 
 export const routes = [
@@ -17,40 +18,35 @@ export const routes = [
         isPublic: true,
     },
     {
-        path: '/', // الأب (Layout)
+        path: '/', //Layout)
         element: MainLayout,
         isPublic: false,
         children: [
             {
-                path: 'dashboard', 
-                element: () => <div>إحصائيات المنيو</div>, 
+                path: 'dashboard',
+                element: () => <div>إحصائيات المنيو</div>,
             },
             {
-                path: 'products', // سيصبح المسار /products
+                path: 'products',
                 element: Products,
             },
             {
-                path: 'categories', // سيصبح المسار /categories
+                path: 'section/:id',          
+                     element:sectionDetails ,
+            },
+            {
+                path: 'categories',
                 element: Categories,
             },
-             {
-                path: 'sections', // سيصبح المسار /sections
-                element: Sections,
-            },
-           
-              {
-                path: 'offers', // سيصبح المسار /offers
+
+            {
+                path: 'offers', 
                 element: Offers,
             },
-              {
-                path: 'finance', // سيصبح المسار /finance
+            {
+                path: 'finance', 
                 element: finance,
             },
-            
-
-
-
-
         ]
     },
     {

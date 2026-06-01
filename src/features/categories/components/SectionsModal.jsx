@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import 'react-responsive-modal/styles.css';
 
-export default function AddSectionModal({ isOpen, setIsOpen }) {
+export default function AddSectionModal({ setIsSectionOpen, isSectionOpen, addSection, categories  }) {
 
     const {
         register,
@@ -12,19 +12,17 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
-            categoryName: '',
-            categoryDescription: '',
+            SectionName: '',
+            categorySelect: "",
         }
     });
 
+    const categoriesArray = categories || []
+
     const onSubmit = async (data) => {
-        try {
-            console.log('Category Data:', data);
-            reset();
-            setIsOpen(false);
-        } catch (error) {
-            console.error(error);
-        }
+        addSection(data)
+        reset();
+        setIsSectionOpen(false);
     };
 
     const pizzaKingStyles = {
@@ -49,7 +47,7 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
 
     return (
         <div>
-            <Modal open={isOpen} onClose={() => setIsOpen(false)} center styles={pizzaKingStyles}>
+            <Modal open={isSectionOpen} onClose={() => setIsSectionOpen(false)} center styles={pizzaKingStyles}>
                 <div className="text-right" dir="rtl">
 
                     <div className="flex items-center gap-2 mb-2 border-b border-zinc-800 pb-3">
@@ -63,7 +61,7 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
                             <input
                                 type="text"
                                 placeholder="ادخل اسم السكشن"
-                                {...register('categoryName')}
+                                {...register('SectionName')}
                                 className={`w-full px-4 py-3 rounded-xl bg-[#141414] border ${errors.categoryName ? 'border-red-500' : 'border-zinc-800 focus:border-[#e17c05]'
                                     } text-white placeholder-zinc-600 text-sm focus:outline-none transition-colors`}
                             />
@@ -83,15 +81,13 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
                                     className={`w-full px-4 py-3 rounded-xl bg-[#141414] border ${errors.categorySelect ? 'border-red-500' : 'border-zinc-800 focus:border-[#e17c05]'
                                         } text-zinc-300 focus:text-white text-sm focus:outline-none transition-colors appearance-none cursor-pointer`}
                                 >
-                                    {/* الـ Placeholder الافتراضي */}
                                     <option value="" className="bg-[#0d0d0d] text-zinc-600">اختر الفئة الرئيسية...</option>
-
-                                    {/* الخيارات بستايل غامق متناسق */}
-                                    <option value="pizza" className="bg-[#0d0d0d] text-zinc-300 py-2">بيتزا</option>
-                                    <option value="kingdom" className="bg-[#0d0d0d] text-zinc-300 py-2">كينجدام</option>
+                                    {categoriesArray?.map((cat) => (
+                                        <option key={cat.documentId} value={cat.documentId} className="bg-[#0d0d0d] text-zinc-300 py-2">{cat.Name}</option>
+                                    )
+                                    )}
                                 </select>
 
-                                {/* سهم مخصص شيك (SVG) عشان لغينا السهم الافتراضي البايخ بتاع المتصفح بـ appearance-none */}
                                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-zinc-500">
                                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -99,7 +95,6 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
                                 </div>
                             </div>
 
-                            {/* عرض رسالة الخطأ لو لم يتم الاختيار */}
                             {errors.categorySelect && (
                                 <span className="text-xs text-red-400 mt-1.5 block">{errors.categorySelect.message}</span>
                             )}
@@ -108,7 +103,7 @@ export default function AddSectionModal({ isOpen, setIsOpen }) {
                         <div className="flex gap-3 justify-end pt-4 border-t border-zinc-900 mt-6">
                             <button
                                 type="button"
-                                onClick={() => { reset(); setIsOpen(false); }}
+                                onClick={() => { reset(); setIsSectionOpen(false); }}
                                 className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white text-xs font-semibold transition-colors"
                             >
                                 إلغاء التعديل
