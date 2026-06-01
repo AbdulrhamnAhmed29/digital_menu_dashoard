@@ -1,4 +1,6 @@
 import BaseApi from "../../../api/baseApi";
+    import qs from 'qs';
+
 
 export const SectionServices = {
     getSections: async () => {
@@ -10,9 +12,34 @@ export const SectionServices = {
         return res;
     },
     findOne: async (id) => {
-        const query = "populate[products][populate][prices][populate][products_size]=*&populate[products][populate][Image]=true&populate[price_offers][populate][offers]=*&populate[priceOfCompo][populate][compo_offers]=*";
-        const res = await BaseApi.getById("/menu-sections", id, query);
-        return res.data
+        const queryObj = {
+            populate: {
+                products: {
+                    populate: {
+                        prices: {
+                            populate: {
+                                products_size: '*'
+                            }
+                        },
+                        Image: true
+                    }
+                },
+                price_offers: {
+                    populate: {
+                        offers: '*'
+                    }
+                },
+                priceOfCompo: {
+                    populate: {
+                        compo_offers: '*'
+                    }
+                }
+            }
+        };
+
+        const queryString = qs.stringify(queryObj, { encodeValuesOnly: true });
+        const res = await BaseApi.getById("menu-sections", id, queryString);
+        return res.data;
     },
     DeleteSection: async (id) => {
         const res = await BaseApi.remove("/menu-sections", id);
