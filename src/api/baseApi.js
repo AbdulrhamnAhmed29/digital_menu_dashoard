@@ -2,16 +2,17 @@ import api from './axiosConfig'
 
 const BaseApi = {
   getAll: async (resource, params = {}) => {
-    const  data  = await api.get(resource, { params })
+    const data = await api.get(resource, { params })
     return data
   },
 
-  getById: async (resource, id) => {
-    const { data } = await api.get(`${resource}/${id}`)
+  getById: async (resource, id, queryString = "") => {
+    const { data } = await api.get(`${resource}/${id}?${queryString}`)
     return data
   },
 
   create: async (resource, payload) => {
+    console.log(payload);
     const { data } = await api.post(resource, payload)
     return data
   },

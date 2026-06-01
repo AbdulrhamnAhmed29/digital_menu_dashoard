@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <div className="relative flex bg-[#050505] min-h-screen text-zinc-100 overflow-hidden">
       <div
-        className="absolute pointer-events-none inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(251,146,60,0.12)_0%,rgba(0,0,0,3)_70%)]"
+        className="absolute pointer-events-none inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(251,140,90,0.12)_0%,rgba(0,0,0,3)_70%)]"
       />
       <div
         className="absolute pointer-events-none top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[300px] z-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.015)_0%,rgba(0,0,0,0)_80%)]"
