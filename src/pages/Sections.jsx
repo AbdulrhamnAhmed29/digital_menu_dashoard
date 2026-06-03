@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AddCategoryModal from "../features/categories/components/CategoriesModal"
 import { useCategories } from "../features/categories/hooks/useGetCategories"
-import { PlusCircle, FolderPlus, Trash2, Layers } from "lucide-react"
+import { PlusCircle, FolderPlus, Trash2, Layers, Eye } from "lucide-react"
 import AddSectionModal from "../features/categories/components/SectionsModal";
 import { useCatMutation } from "../features/categories/hooks/useCategoriesMutation";
 import { useSectionGet } from "../features/categories/hooks/useSection_Get"
@@ -143,7 +143,7 @@ const Sections = () => {
                               className="p-2 hover:bg-red-500/10 rounded-xl text-zinc-500 hover:text-red-400 border border-transparent hover:border-red-500/10 transition-all duration-200"
                               title=" عرض تفاصيل السيكشن "
                             >
-                              <Trash2 size={15} />
+                              <Eye size={15} />
                             </button>
                           </Link>
                           <button
