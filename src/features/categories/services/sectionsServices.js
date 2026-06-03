@@ -1,5 +1,5 @@
 import BaseApi from "../../../api/baseApi";
-    import qs from 'qs';
+import qs from 'qs';
 
 
 export const SectionServices = {
@@ -24,16 +24,20 @@ export const SectionServices = {
                         Image: true
                     }
                 },
-                price_offers: {
+                offers_prices: {
                     populate: {
-                        offers: '*'
+                        offer: true
                     }
                 },
-                priceOfCompo: {
+
+                compo_offers_prices: {
                     populate: {
-                        compo_offers: '*'
+                        compo_offer: true
                     }
-                }
+                },
+
+
+
             }
         };
 

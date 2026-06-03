@@ -1,16 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSectionGet } from "../features/categories/hooks/useSection_Get";
 
 function SectionDetails() {
     const { id } = useParams();
     const { findOne, isLoading, error } = useSectionGet(id);
+    const navigate = useNavigate();
 
-    console.log(findOne);
 
     const STRAPI_BASE_URL = "http://localhost:1337";
 
-    // 1. حالة التحميل متماشية مع الثيم الأسود القاتم
     if (isLoading) {
         return (
             <div className="flex justify-center items-center min-h-[50vh] bg-[#0a0a0a]">
@@ -18,8 +17,10 @@ function SectionDetails() {
             </div>
         );
     }
+    const handleBack = () => {
+        navigate(-1);
+    }
 
-    // 2. حالة الخطأ بـ استايل أسود داكن ونظيف
     if (error || !findOne) {
         return (
             <div className="text-center py-20 text-amber-500/80 font-medium text-lg bg-[#000]/60 rounded-2xl border border-amber-950/40 max-w-2xl mx-auto my-10">
@@ -28,54 +29,66 @@ function SectionDetails() {
         );
     }
 
-    const { Name, products, price_offers, priceOfCompo } = findOne;
+    const { Name, products, compo_offers_prices, offers_prices } = findOne;
 
     return (
-        <div className="max-w-6xl mx-auto px-6 py-6 text-gray-200" dir="rtl">
 
-            {/* ================= عنوان القسم الحالي ================= */}
+        <div className="max-w-6xl mx-auto px-6 py-6 text-gray-200" dir="rtl">
+       
+                <button onClick={handleBack} className="mb-6 text-sm text-amber-400 hover:text-amber-500 transition-colors duration-200 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    العودة للقائمة
+                </button>
+
+
+            {/* ================= section name================= */}
+
             <div className="text-center mb-10 relative">
                 <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 tracking-wide mb-2">
                     {Name}
                 </h1>
-                {/* خط فاصل ناعم تماشياً مع الـ Glow الفوقاني */}
                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto mt-4"></div>
             </div>
+            
 
-            {/* ================= قسم العروض (لو متوفرة) ================= */}
-            {(price_offers?.length > 0 || priceOfCompo?.length > 0) && (
-                <div className="mb-12">
-                    <h2 className="text-lg font-bold text-amber-400/90 mb-4 flex items-center gap-2">
-                        <span className="w-1.5 h-4 bg-amber-500 rounded-sm"></span>
-                        عروض السيكشن الحالية
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* عروض أسعار المباشرة */}
-                        {price_offers?.map((offerObj) => (
-                            <div key={offerObj.id} className="bg-[#050505] border border-amber-500/20 rounded-xl p-4 flex items-center justify-between shadow-2xl">
-                                <div>
-                                    <span className="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20"> خصم</span>
-                                    <h3 className="text-md font-semibold mt-2 text-gray-300">{offerObj.offers?.[0].quantity || "خصم خاص"} {offerObj.offers?.[0].offer_type==="medium"?"وسط":"كبير" || "خصم خاص"} </h3>
-                                </div>
-                                <span className="text-xl font-black text-amber-400">{offerObj.Price} ج.م</span>
-                            </div>
-                        ))}
-                        {/* عروض الكومبو */}
-                        {priceOfCompo?.length > 0 && (
-                            <div className="bg-[#050505] border border-orange-500/20 rounded-xl p-4 flex items-center justify-between shadow-2xl">
-                                <div>
-                                    <span className="bg-orange-500/10 text-orange-400 text-xs px-2 py-0.5 rounded border border-orange-500/20"> {priceOfCompo?.[0]?.compo_offers?.[0]?.title}</span>
-                                    <h3 className="text-md font-semibold mt-2 text-gray-300">{priceOfCompo?.[0]?.compo_offers?.[0]?.description || "ميكس كومبو"}</h3>
-                                </div>
-                                <span className="text-xl font-black text-orange-400">{priceOfCompo?.[0]?.price} ج.م</span>
-                            </div>
-                        )}
 
+            {/* ================ section offers ================ */}
+            {
+                (compo_offers_prices?.length > 0 || offers_prices?.length > 0) && (
+                    <div className="mb-12">
+                        <h2 className="text-lg font-bold text-amber-400/90 mb-4 flex items-center gap-2">
+                            <span className="w-1.5 h-4 bg-amber-500 rounded-sm"></span>
+                            عروض السيكشن الحالية
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {offers_prices?.map((offerObj) => (
+                                <div key={offerObj.id} className="bg-[#050505] border border-amber-500/20 rounded-xl p-4 flex items-center justify-between shadow-2xl">
+                                    <div>
+                                        <span className="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded border border-amber-500/20"> خصم</span>
+                                        <h3 className="text-md font-semibold mt-2 text-gray-300"> عرض ال {offerObj.offer?.quantity || "خصم خاص"} {offerObj.offer?.offer_type === "medium" ? "وسط" : "كبير" || "خصم خاص"} </h3>
+                                    </div>
+                                    <span className="text-xl font-black text-amber-400">{offerObj.price} ج.م</span>
+                                </div>
+                            ))}
+                            {/* compo offer */}
+                            {compo_offers_prices?.length > 0 && (
+                                <div className="bg-[#050505] border border-orange-500/20 rounded-xl p-4 flex items-center justify-between shadow-2xl">
+                                    <div>
+                                        <span className="bg-orange-500/10 text-orange-400 text-xs px-2 py-0.5 rounded border border-orange-500/20"> {compo_offers_prices?.[0]?.compo_offer?.title}</span>
+                                        <h3 className="text-md font-semibold mt-2 text-gray-300">{compo_offers_prices?.compo_offer?.description || "ميكس كومبو"}</h3>
+                                    </div>
+                                    <span className="text-xl font-black text-orange-400">{compo_offers_prices?.[0]?.price} ج.م</span>
+                                </div>
+                            )}
+
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
-            {/* ================= قائمة المنتجات (الأصناف) ================= */}
+            {/* ================= productas================= */}
             <div>
                 <h2 className="text-lg font-bold text-amber-400/90 mb-6 flex items-center gap-2">
                     <span className="w-1.5 h-4 bg-amber-500 rounded-sm"></span>
@@ -94,7 +107,6 @@ function SectionDetails() {
                             return (
                                 <div key={product.id} className="bg-[#000] rounded-xl overflow-hidden border border-zinc-900 flex flex-col justify-between group hover:border-amber-500/30 transition-all duration-300 shadow-2xl">
 
-                                    {/* صورة المنتج مع زاوية مظلمة سوداء تماماً في الأسفل */}
                                     <div className="relative h-48 bg-[#050505] overflow-hidden">
                                         <img
                                             src={imageUrl}
@@ -141,7 +153,7 @@ function SectionDetails() {
                 )}
             </div>
 
-        </div>
+        </div >
     );
 }
 
