@@ -5,9 +5,9 @@ const SignIn = lazy(() => import('./features/auth/components/SignIn'));
 const Products = lazy(() => import('./pages/Products'));
 const Categories = lazy(() => import('./pages/Sections'));
 const sectionDetails = lazy(() => import('./pages/SectionDetails'));
-
 const Offers = lazy(() => import('./pages/Offers'));
 const finance = lazy(() => import('./pages/Finance'));
+const AddProduct = lazy(() => import('./pages/AddProduct'));
 
 
 
@@ -46,6 +46,10 @@ export const routes = [
             {
                 path: 'finance', 
                 element: finance,
+            },
+            {
+                path: 'products/add',
+                element: AddProduct,
             },
         ]
     },

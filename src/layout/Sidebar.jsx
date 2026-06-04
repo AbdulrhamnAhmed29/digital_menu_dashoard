@@ -58,12 +58,10 @@ const Sidebar = () => {
                 
                 ${isOpen ? 'translate-y-0 lg:w-68 lg:translate-x-0' : 'translate-y-full lg:translate-y-0 lg:w-24 lg:translate-x-0'} 
                 
-                /* استخدمنا cubic-bezier مخصص هنا عشان يعطي مرونة ونعومة فائقة في الفتح والقفل */
                 bg-gradient-to-b from-zinc-950 via-neutral-950 to-zinc-950 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col z-50 
                 shadow-[0_-10px_40px_rgba(0,0,0,0.9)] lg:shadow-[0_0_50px_rgba(0,0,0,0.8)]`}
             >
-                <div className="w-12 h-1 bg-zinc-800 rounded-full mx-auto mt-3 block lg:hidden" />
-
+                <div className="w-10 h-1 bg-zinc-800 rounded-full mx-auto mt-3 block lg:hidden" />
                 <div className="p-4 h-20 border-b border-white/[0.06] flex items-center justify-between bg-black/20 mt-2 lg:mt-0">
                     <div className="flex items-center gap-3 overflow-hidden">
                         <div className="w-11 h-11 flex-shrink-0 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-xl p-1.5 border border-white/10 shadow-inner">
@@ -73,7 +71,6 @@ const Sidebar = () => {
                                 className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(251,146,60,0.2)]"
                             />
                         </div>
-                        {/* أنيميشن ناعم لاسم اللوجو يختفي ويظهر بالـ Opacity والـ Width بالتوازي */}
                         <div className={`text-right whitespace-nowrap transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 max-w-[200px]' : 'lg:opacity-0 lg:max-w-0 lg:pointer-events-none'}`}>
                             <p className="font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-white via-zinc-200 to-zinc-400 text-base tracking-wide leading-tight">بيتزا كينج</p>
                             <p className="text-[10px] font-medium text-amber-500/80 uppercase tracking-widest mt-0.5">The King Dashboard</p>
