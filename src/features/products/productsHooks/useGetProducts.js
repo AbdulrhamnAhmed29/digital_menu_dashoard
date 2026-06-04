@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { productsservices } from "../productServices/productServises";
+import { productsSizeServices } from "../productServices/productsSizeServices";
 
 export const useGetProducts = (id) => {
     // ======== products query===========
@@ -15,12 +16,18 @@ export const useGetProducts = (id) => {
         enabled: !!id
     });
 
+    const { data: productsSizes } = useQuery({
+        queryKey: ["productsSizes"],
+        queryFn: productsSizeServices.getProductsSizes
+    });
+
     return {
         productsList: productsList?.data,
         isLoading,
         isError,
         oneProduct: oneProduct?.data,
         oneProductLoading,
-        oneProductError
+        oneProductError,
+        productsSizes: productsSizes?.data
     }
 }
