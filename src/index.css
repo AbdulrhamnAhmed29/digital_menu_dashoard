@@ -2,3 +2,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f59e0b #09090b; /* اللون الذهبي للأصل والخلفية السوداء */
+}
+
+/* 2. متصفحات ويب كيت (Chrome, Safari, Edge, Opera) */
+
+/* العرض الإجمالي لشريط التمرير */
+::-webkit-scrollbar {
+  width: 10px;          /* عرض شريط التمرير الرأسي */
+  height: 10px;         /* ارتفاع شريط التمرير الأفقي إن وجد */
+}
+
+/* مسار أو خلفية شريط التمرير (Track) */
+::-webkit-scrollbar-track {
+  background: #09090b;  /* أسود داكن جداً يتماشى مع لوحتك */
+  border-left: 1px solid rgba(255, 255, 255, 0.03); /* خط وهمي رفيع جداً للفصل بصرياً */
+}
+
+/* مقبض شريط التمرير نفسه (Thumb) */
+::-webkit-scrollbar-thumb {
+  /* تدرج لوني فاخر من الأسود الصافي إلى الذهبي الدافئ ودرجات الـ Amber */
+  background: linear-gradient(to bottom, #000000, #b45309, #d97706, #f59e0b, #000000);
+  border-radius: 100vh; /* حواف دائرية كاملة للمظهر العصري المدور */
+  border: 2px solid #09090b; /* مسافة أمان لتبدو الـ Thumb طافية داخل المسار */
+  box-shadow: inset 0 0 6px rgba(245, 158, 11, 0.2); /* توهج ذهبي داخلي ناعم */
+  transition: all 0.3s ease-in-out;
+}
+
+/* تأثير التمرير الفوقي (Hover) عند وضع مؤشر الفأرة على المقبض */
+::-webkit-scrollbar-thumb:hover {
+  /* تدرج لوني أكثر إضاءة وتوهجاً عند الـ Hover */
+  background: linear-gradient(to bottom, #000000, #d97706, #f59e0b, #fbbf24, #000000);
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); /* زيادة توهج التظليل */
+}
