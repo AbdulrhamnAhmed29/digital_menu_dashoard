@@ -12,9 +12,12 @@ const BaseApi = {
   },
 
   create: async (resource, payload) => {
-    console.log(payload);
-    const { data } = await api.post(resource, payload)
-    return data
+    const res = await api.post(resource, payload)
+    return res
+  },
+  upload: async (resource, formData) => {
+    const res = await api.post(resource, formData);
+    return res
   },
 
   update: async (resource, id, payload) => {
@@ -32,14 +35,8 @@ const BaseApi = {
     return data
   },
 
-  upload: async (resource, formData) => {
-    const { data } = await api.post(resource, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    return data
-  },
+
+
 }
 
 export default BaseApi
