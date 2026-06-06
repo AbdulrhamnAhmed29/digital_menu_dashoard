@@ -3,14 +3,11 @@ import Cookies from 'js-cookie'
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:1337/api',
-  headers: {
-    'Content-Type': 'application/json',
-  },
 })
 
 api.interceptors.request.use(
   (config) => {
-    const token = Cookies.get('jwt')    
+    const token = Cookies.get('jwt')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
