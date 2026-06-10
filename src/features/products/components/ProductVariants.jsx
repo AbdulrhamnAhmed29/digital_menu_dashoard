@@ -9,7 +9,6 @@ function ProductVariants({Size}) {
         name:"prices"
     });
     const premiumInputClass = "w-full bg-zinc-950 border border-white/10 rounded-xl p-3 text-white focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-all duration-200 placeholder-zinc-600 text-sm text-right";
-
     return (
         <div>
             <div className="space-y-4 border-t border-white/5 pt-5">

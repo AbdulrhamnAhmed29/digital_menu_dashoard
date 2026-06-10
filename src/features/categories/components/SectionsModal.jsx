@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import 'react-responsive-modal/styles.css';
 
-export default function AddSectionModal({ setIsSectionOpen, isSectionOpen, addSection, categories  }) {
+export default function AddSectionModal({ setIsSection, isSection, addSec, category  }) {
 
     const {
         register,
@@ -17,12 +17,12 @@ export default function AddSectionModal({ setIsSectionOpen, isSectionOpen, addSe
         }
     });
 
-    const categoriesArray = categories || []
+    const categoriesArray = category || []
 
     const onSubmit = async (data) => {
-        addSection(data)
+        addSec(data)
         reset();
-        setIsSectionOpen(false);
+        setIsSection(false);
     };
 
     const pizzaKingStyles = {
@@ -47,7 +47,7 @@ export default function AddSectionModal({ setIsSectionOpen, isSectionOpen, addSe
 
     return (
         <div>
-            <Modal open={isSectionOpen} onClose={() => setIsSectionOpen(false)} center styles={pizzaKingStyles}>
+            <Modal open={isSection} onClose={() => setIsSection(false)} center styles={pizzaKingStyles}>
                 <div className="text-right" dir="rtl">
 
                     <div className="flex items-center gap-2 mb-2 border-b border-zinc-800 pb-3">
@@ -103,7 +103,7 @@ export default function AddSectionModal({ setIsSectionOpen, isSectionOpen, addSe
                         <div className="flex gap-3 justify-end pt-4 border-t border-zinc-900 mt-6">
                             <button
                                 type="button"
-                                onClick={() => { reset(); setIsSectionOpen(false); }}
+                                onClick={() => { reset(); setIsSection(false); }}
                                 className="px-4 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white text-xs font-semibold transition-colors"
                             >
                                 إلغاء التعديل
