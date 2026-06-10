@@ -3,9 +3,7 @@ import { FolderPlus, PlusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
-function ProductPageHeader({setIsSectionOpen,isSectionOpen,addSection,categories}) {
-
- 
+function ProductPageHeader({ setIsSectionOpen, isSectionOpen, addSection, categories, }) {
 
     return (
         <div>
@@ -45,6 +43,9 @@ function ProductPageHeader({setIsSectionOpen,isSectionOpen,addSection,categories
                             <span>إضافة منتج جديد</span>
                         </Link>
                     </button>
+
+                 
+
                 </div>
             </div>
         </div>

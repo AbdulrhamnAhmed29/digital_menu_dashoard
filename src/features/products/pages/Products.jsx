@@ -11,6 +11,7 @@ import { useSectionMutation } from "../../categories/hooks/useSection_mutation";
 import ProductPageHeader from "../components/productPageHeader";
 import ProductTable from "../components/productTable";
 import ProductPagination from "../components/productPagination";
+import SearchInput from "../../../shared/SearchInput";
 
 const Products = () => {
 
@@ -20,10 +21,10 @@ const Products = () => {
     isError,
     paginationData,
     page,
-    setPage
+    setPage,
+    search,
+    setSearchItem,
   } = useGetProducts();
-
-  console.log(productsList);
 
   const { deleteFunction } = useProductMutation();
   const { categories } = useCategories();
@@ -44,6 +45,7 @@ const Products = () => {
       </div>
     );
   }
+
 
   // ====== IS DATA ERRORS ========
   if (isError) {
@@ -70,8 +72,14 @@ const Products = () => {
         isSectionOpen={isSectionOpen}
         addSection={addSection}
         categories={categories}
+        setSearchItem={setSearchItem}
+        search={search}
       />
-
+      <SearchInput
+        setSearchItem={setSearchItem}
+        SearchInput={SearchInput}
+      />
+     
       {/* ========== TABLE BODY=========== */}
       <ProductTable
         deleteFunction={deleteFunction}
