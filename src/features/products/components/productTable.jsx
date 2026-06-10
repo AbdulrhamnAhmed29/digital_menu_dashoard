@@ -24,9 +24,6 @@ function ProductTable({ products, deleteFunction, }) {
         { id: "size-l", label: "كبير (L)", className: "p-4 text-center" },
         { id: "actions", label: "إجراءات التحكم", className: "p-4 text-left pl-6" }
     ];
-
-
-
     return (
         <div>
             <div className="w-full overflow-hidden rounded-[2rem] border border-white/[0.05] bg-transparent backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.3)]">

@@ -1,14 +1,14 @@
 import BaseApi from "../../../api/baseApi";
 
 export const productsservices = {
-  getProducts: async () => {
-    const { data } = await BaseApi.getAll("/products?populate[prices][populate][products_size]=*&populate[Image]=true&pagination[limit]=100&populate[menu_section]=true");
-    return data;
+  getProducts: async (page) => {
+    const  res  = await BaseApi.getAll(`/products?populate[prices][populate][products_size]=*&populate[Image]=true&populate[menu_section]=true&pagination[page]=${page}&pagination[pageSize]=25`);    
+    return res;
   },
 
   CreateProduct: async (data) => {
-    console.log(data)
-    const res = await BaseApi.create("/products", data);
+    const res = await BaseApi.create("/products", data);  
+      
     return res;
   },
   createProductImage: async (formData) => {

@@ -1,15 +1,15 @@
 import { useState } from "react";
-import AddCategoryModal from "../components/CategoriesModal";
+//=========IMPORT DATA FROM HOOKS =====
 import { useCategories } from "../hooks/useGetCategories";
-import AddSectionModal from "../components/SectionsModal";
 import { useCatMutation } from "../hooks/useCategoriesMutation";
 import { useSectionGet } from "../hooks/useSection_Get";
 import { useSectionMutation } from "../hooks/useSection_mutation";
+
+// ===== SUB COMPONENT ======
 import SectionHeader from "../components/SectionHeader";
 import SectionTable from "../components/SectionTable";
 
 const Sections = () => {
-
   //========= DATA FROM HOOKS =======
   const { sections, isLoading } = useSectionGet();
   const { addSection, remove } = useSectionMutation();
@@ -47,29 +47,28 @@ const Sections = () => {
 
   return (
     <div dir="rtl" className="p-6 space-y-6 select-none antialiased text-stone-100">
+      {/*========== SECTION HEADER ===== */}
+      <SectionHeader
+        //====== STATE FOR MODEL======= 
+        //----- SECTION MODEL STAE-----
+        setIsSectionOpen={setIsSectionOpen}
+        isSectionOpen={isSectionOpen}
 
-      {/*========== CATEGORY MODEL ======== */}
-      <AddCategoryModal
+        //----- CATEGORY MODEL STAE-----
         setIsOpen={setIsOpen}
         isOpen={isOpen}
+
+        //==== FUNCTIONS CREATE AND CATEGORIES ARRAY ======== 
+        categories={categories}
+        addSec={addSection}
         addCategory={addCategory}
         isError={isError}
       />
 
-      {/*========== SECTION MODEL ======== */}
-      <AddSectionModal
-        setIsSectionOpen={setIsSectionOpen}
-        isSectionOpen={isSectionOpen}
-        addSection={addSection}
-        categories={categories}
-        remove={remove}
-      />
-
-      {/*========== SECTION HEADER ===== */}
-      <SectionHeader setIsSectionOpen={setIsSectionOpen} setIsOpen={setIsOpen} />
-
-      {/*========== SECTION HEADER ===== */}
-      <SectionTable sectionsList={sectionsList} />
+      {/*========== SECTION TABLE ===== */}
+      <SectionTable
+        sectionsList={sectionsList}
+        deleteFunction={remove} />
     </div>
   );
 };
