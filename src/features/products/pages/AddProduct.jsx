@@ -2,19 +2,19 @@
 import { useForm, FormProvider } from "react-hook-form";
 
 // ==========data from hooks file====== 
-import { useGetProducts } from "../features/products/productsHooks/useGetProducts";
-import { useProductMutation } from "../features/products/productsHooks/useProductMutation";
-import { useSectionGet } from "../features/categories/hooks/useSection_Get";
+import { useGetProducts } from "../productsHooks/useGetProducts";
+import { useProductMutation } from "../productsHooks/useProductMutation";
+import { useSectionGet } from "../../categories/hooks/useSection_Get";
 
 // =========shared components==========
-import BackButton from "../shared/BackButton";
+import BackButton from "../../../shared/BackButton";
 
 // ========= sub componensts ========
-import ProductInfoFields from "../features/products/components/ProductInfoFields";
-import ProductSectionsList from "../features/products/components/ProductSectionsList";
-import ProductVariants from "../features/products/components/ProductVariants";
-import ProductImageUpload from "../features/products/components/ProductImageUpload";
-import { showSuccessAlert } from "../shared/Alert";
+import ProductInfoFields from "../components/ProductInfoFields";
+import ProductSectionsList from "../components/ProductSectionsList";
+import ProductVariants from "../components/ProductVariants";
+import ProductImageUpload from "../components/ProductImageUpload";
+import { showSuccessAlert } from "../../../shared/Alert";
 
 const AddProductForm = () => {
 
