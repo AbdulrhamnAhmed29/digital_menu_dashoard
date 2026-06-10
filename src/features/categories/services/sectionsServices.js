@@ -35,9 +35,6 @@ export const SectionServices = {
                         compo_offer: true
                     }
                 },
-
-
-
             }
         };
 
