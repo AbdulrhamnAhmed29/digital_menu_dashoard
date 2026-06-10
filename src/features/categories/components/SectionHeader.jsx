@@ -1,7 +1,18 @@
 import { FolderPlus, PlusCircle } from 'lucide-react'
 import React from 'react'
+import AddSectionModal from './SectionsModal'
+import AddCategoryModal from './CategoriesModal'
 
-function SectionHeader({ setIsSectionOpen, setIsOpen }) {
+function SectionHeader({
+        setIsSectionOpen,
+        addSec,
+        isSectionOpen,
+        categories,
+        setIsOpen,
+        isOpen,
+        isError,
+        addCategory
+    }) {
 
     return (
         <div>
@@ -24,6 +35,14 @@ function SectionHeader({ setIsSectionOpen, setIsOpen }) {
                         <span>إضافة فئة (Category)</span>
                     </button>
 
+                    {/*========== CATEGORY MODEL ======== */}
+                    <AddCategoryModal
+                        setIsOpen={setIsOpen}
+                        isOpen={isOpen}
+                        addCategory={addCategory}
+                        isError={isError}
+                    />
+
                     <button
                         onClick={() => setIsSectionOpen(true)}
                         className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-l from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 hover:shadow-[0_10px_25px_rgba(245,158,11,0.25)] text-black font-extrabold text-sm rounded-xl transition-all active:scale-[0.98] shadow-[0_4px_15px_rgba(245,158,11,0.2)] cursor-pointer"
@@ -31,6 +50,14 @@ function SectionHeader({ setIsSectionOpen, setIsOpen }) {
                         <PlusCircle size={16} />
                         <span>إضافة قسم (Sections)</span>
                     </button>
+                    {/*========== SECTION MODEL ======== */}
+                    <AddSectionModal
+                         isSection={isSectionOpen}
+                        setIsSection={setIsSectionOpen}
+                        addSec={addSec}
+                        category={categories}
+                    />
+
                 </div>
             </div>
         </div>

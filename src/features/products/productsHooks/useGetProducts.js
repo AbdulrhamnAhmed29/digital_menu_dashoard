@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { productsservices } from "../productServices/productServises";
 import { productsSizeServices } from "../productServices/productsSizeServices";
+import { useState } from "react";
 
 export const useGetProducts = (id) => {
+    const [page, setPage] = useState(1);
     // ======== products query===========
     const { data: productsList, isLoading, isError } = useQuery({
-        queryKey: ["products"],
-        queryFn: productsservices.getProducts
+        queryKey: ["products", page],
+        queryFn: () => productsservices.getProducts(page)
     });
 
     // ========= one product query ==========
@@ -22,9 +24,12 @@ export const useGetProducts = (id) => {
     });
 
     return {
-        productsList: productsList?.data,
+        productsList: productsList?.data?.data,
+        paginationData:productsList?.data?.meta,
         isLoading,
         isError,
+        setPage,
+        page,
         oneProduct: oneProduct?.data,
         oneProductLoading,
         oneProductError,

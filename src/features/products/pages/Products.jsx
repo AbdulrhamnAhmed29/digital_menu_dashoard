@@ -10,11 +10,21 @@ import { useSectionMutation } from "../../categories/hooks/useSection_mutation";
 // ====== SUB COMPONENT ========
 import ProductPageHeader from "../components/productPageHeader";
 import ProductTable from "../components/productTable";
+import ProductPagination from "../components/productPagination";
 
 const Products = () => {
 
   // ====== DESTRACTRUNG DATA FROM HOOKS  ========
-  const { productsList, isLoading, isError } = useGetProducts();
+  const { productsList,
+    isLoading,
+    isError,
+    paginationData,
+    page,
+    setPage
+  } = useGetProducts();
+
+  console.log(productsList);
+
   const { deleteFunction } = useProductMutation();
   const { categories } = useCategories();
   const { addSection } = useSectionMutation();
@@ -23,7 +33,7 @@ const Products = () => {
   const [isSectionOpen, setIsSectionOpen] = useState(false);
   const products = productsList || [];
 
- // ====== IS DATA LOADING ========
+  // ====== IS DATA LOADING ========
   if (isLoading) {
     return (
       <div className="p-6 flex flex-col items-center justify-center min-h-[50vh] space-y-4">
@@ -35,7 +45,7 @@ const Products = () => {
     );
   }
 
- // ====== IS DATA ERRORS ========
+  // ====== IS DATA ERRORS ========
   if (isError) {
     return (
       <div className="p-6 bg-stone-950 min-h-screen flex justify-center items-center">
@@ -54,18 +64,25 @@ const Products = () => {
       dir="rtl"
       className="p-6 space-y-6 select-none antialiased text-stone-100"
     >
-      {/* ======Header======= */}
+      {/* ====== HEADER ======= */}
       <ProductPageHeader
         setIsSectionOpen={setIsSectionOpen}
         isSectionOpen={isSectionOpen}
         addSection={addSection}
         categories={categories}
-      /> 
+      />
 
-      {/* ========== Table Content =========== */}
+      {/* ========== TABLE BODY=========== */}
       <ProductTable
         deleteFunction={deleteFunction}
         products={products}
+      />
+
+      {/*======= PRODUCT PAGINATION ===== */}
+      <ProductPagination
+        page={page}
+        setPage={setPage}
+        paginationData={paginationData}
       />
     </div>
   );

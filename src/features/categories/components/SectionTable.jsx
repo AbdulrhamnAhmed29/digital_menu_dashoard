@@ -1,7 +1,9 @@
-import { Eye, Link, Trash2 } from 'lucide-react';
+import { Eye,  Trash2 } from 'lucide-react';
 import React from 'react'
+import { showDeleteConfirmAlert } from '../../../shared/Alert';
+import { Link } from 'react-router-dom';
 
-function SectionTable({ sectionsList }) {
+function SectionTable({ sectionsList, deleteFunction }) {
     return (
         <div>
             <div className="w-full overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-b from-zinc-900/20 to-zinc-950/40 backdrop-blur-md shadow-2xl">
@@ -51,8 +53,8 @@ function SectionTable({ sectionsList }) {
                                                             <Eye size={15} />
                                                         </button>
                                                     </Link>
-
                                                     <button
+                                                        onClick={() => showDeleteConfirmAlert(sectionName ,()=> deleteFunction(sectionId))}
                                                         className="p-2 hover:bg-red-500/10 active:scale-90 rounded-xl text-zinc-500 hover:text-red-400 border border-transparent hover:border-red-500/10 transition-all cursor-pointer"
                                                         title="حذف القسم"
                                                     >
