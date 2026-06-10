@@ -1,11 +1,11 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useSectionGet } from "../features/categories/hooks/useSection_Get";
+import BackButton from '../shared/BackButton';
 
 function SectionDetails() {
     const { id } = useParams();
     const { findOne, isLoading, error } = useSectionGet(id);
-    const navigate = useNavigate();
 
 
     const STRAPI_BASE_URL = "http://localhost:1337";
@@ -17,9 +17,7 @@ function SectionDetails() {
             </div>
         );
     }
-    const handleBack = () => {
-        navigate(-1);
-    }
+ 
 
     if (error || !findOne) {
         return (
@@ -34,13 +32,8 @@ function SectionDetails() {
     return (
 
         <div className="max-w-6xl mx-auto px-6 py-6 text-gray-200" dir="rtl">
-       
-                <button onClick={handleBack} className="mb-6 text-sm text-amber-400 hover:text-amber-500 transition-colors duration-200 flex items-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                    العودة للقائمة
-                </button>
+
+            <BackButton />
 
 
             {/* ================= section name================= */}
@@ -51,7 +44,7 @@ function SectionDetails() {
                 </h1>
                 <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent mx-auto mt-4"></div>
             </div>
-            
+
 
 
             {/* ================ section offers ================ */}

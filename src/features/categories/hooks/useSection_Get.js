@@ -8,7 +8,7 @@ export const useSectionGet = (id) => {
     const findOne = useQuery({
         queryKey: ["section", id],
         queryFn: () => SectionServices.findOne(id),
-        enabled:id
+        enabled:!!id
     })
     return {
         sections: sections,
