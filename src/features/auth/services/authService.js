@@ -1,5 +1,5 @@
 import api from '../../../api/axiosConfig'
-
+import Cookies from 'js-cookie'
 const authService = {
   login: async (credentials) => {
     const { data } = await api.post('/auth/local', credentials)
@@ -9,6 +9,7 @@ const authService = {
   logout: () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    Cookies.remove("jwt")
   },
 }
 

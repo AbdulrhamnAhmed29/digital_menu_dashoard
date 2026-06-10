@@ -6,8 +6,8 @@ const SignIn = lazy(() => import('./features/auth/components/SignIn'));
 const Products = lazy(() => import('./features/products/pages/Products'));
 const AddProduct = lazy(() => import('./features/products/pages/AddProduct'));
 
-const Categories = lazy(() => import('./features/products/pages/Products'));
-const sectionDetails = lazy(() => import('./pages/SectionDetails'));
+const Categories = lazy(() => import('./features/categories/pages/Sections'));
+const sectionDetails = lazy(() => import('./features/categories/pages/SectionDetails'));
 const Offers = lazy(() => import('./pages/Offers'));
 const finance = lazy(() => import('./pages/Finance'));
 

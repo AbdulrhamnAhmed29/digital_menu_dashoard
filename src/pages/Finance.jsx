@@ -6,5 +6,4 @@ const Finance = () => {
     </div>
   )
 }
-
 export default Finance
