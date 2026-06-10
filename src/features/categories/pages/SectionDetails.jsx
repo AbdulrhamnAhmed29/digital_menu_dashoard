@@ -1,7 +1,7 @@
 import React from 'react';
 import {  useParams } from 'react-router-dom';
-import { useSectionGet } from "../features/categories/hooks/useSection_Get";
-import BackButton from '../shared/BackButton';
+import { useSectionGet } from "../hooks/useSection_Get";
+import BackButton from '../../../shared/BackButton';
 
 function SectionDetails() {
     const { id } = useParams();
