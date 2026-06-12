@@ -2,14 +2,14 @@ import { ImagePlus } from 'lucide-react';
 import React from 'react'
 import { useFormContext } from 'react-hook-form';
 
-function ProductImageUpload() {
+function ProductImageUpload({imageUrl}) {
     const { register, watch, formState: { errors } } = useFormContext()
 
 //    ========= wselected image =====
     const selectedImage = watch("image");
     const imagePreview = selectedImage && selectedImage[0]
         ? URL.createObjectURL(selectedImage[0])
-        : null;
+        : imageUrl;
     return (
         <div>
             <div className="space-y-2 border-t border-white/5 pt-5">

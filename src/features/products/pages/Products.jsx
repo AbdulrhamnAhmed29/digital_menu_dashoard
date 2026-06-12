@@ -8,9 +8,9 @@ import { useCategories } from "../../categories/hooks/useGetCategories";
 import { useSectionMutation } from "../../categories/hooks/useSection_mutation";
 
 // ====== SUB COMPONENT ========
-import ProductPageHeader from "../components/productPageHeader";
-import ProductTable from "../components/productTable";
-import ProductPagination from "../components/productPagination";
+import ProductPageHeader from "../components/product_table_page/productPageHeader";
+import ProductTable from "../components/product_table_page/productTable";
+import ProductPagination from "../components/product_table_page/productPagination";
 import SearchInput from "../../../shared/SearchInput";
 
 const Products = () => {
@@ -45,8 +45,6 @@ const Products = () => {
       </div>
     );
   }
-
-
   // ====== IS DATA ERRORS ========
   if (isError) {
     return (

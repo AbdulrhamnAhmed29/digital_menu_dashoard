@@ -1,6 +1,7 @@
 import { Edit3, Trash2 } from 'lucide-react';
 import React from 'react'
-import { showDeleteConfirmAlert } from '../../../shared/Alert';
+import { showDeleteConfirmAlert } from '../../../../shared/Alert';
+import { Link } from 'react-router-dom';
 
 function ProductTable({ products, deleteFunction, }) {
     const STRAPI_URL = "http://localhost:1337";
@@ -108,12 +109,15 @@ function ProductTable({ products, deleteFunction, }) {
                                             <td className="p-4 pl-6 text-left">
                                                 <div className="flex items-center justify-end gap-2 opacity-40 group-hover:opacity-100 transition-all duration-200">
                                                     {/*===== Edit Action =======*/}
-                                                    <button
-                                                        className="p-2 hover:bg-amber-500/10 active:scale-90 rounded-xl text-zinc-500 hover:text-amber-400 border border-transparent hover:border-amber-500/10 transition-all"
-                                                        title="تعديل المنتج"
-                                                    >
-                                                        <Edit3 size={15} />
-                                                    </button>
+                                                    <Link to={`/products/${product.documentId}`}>
+                                                        <button
+                                                            className="p-2 hover:bg-amber-500/10 active:scale-90 rounded-xl text-zinc-500 hover:text-amber-400 border border-transparent hover:border-amber-500/10 transition-all"
+                                                            title="تعديل المنتج"
+                                                        >
+                                                            <Edit3 size={15} />
+                                                        </button>
+
+                                                    </Link>
 
                                                     {/*===== Delete Action ========*/}
                                                     <button

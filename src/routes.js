@@ -5,7 +5,7 @@ const SignIn = lazy(() => import('./features/auth/components/SignIn'));
 // =======products routes===== 
 const Products = lazy(() => import('./features/products/pages/Products'));
 const AddProduct = lazy(() => import('./features/products/pages/AddProduct'));
-
+const EditProduct = lazy(() => import("./features/products/pages/EditProduct"))
 const Categories = lazy(() => import('./features/categories/pages/Sections'));
 const sectionDetails = lazy(() => import('./features/categories/pages/SectionDetails'));
 const Offers = lazy(() => import('./pages/Offers'));
@@ -33,8 +33,8 @@ export const routes = [
                 element: Products,
             },
             {
-                path: 'section/:id',          
-                     element:sectionDetails ,
+                path: 'section/:id',
+                element: sectionDetails,
             },
             {
                 path: 'categories',
@@ -42,16 +42,20 @@ export const routes = [
             },
 
             {
-                path: 'offers', 
+                path: 'offers',
                 element: Offers,
             },
             {
-                path: 'finance', 
+                path: 'finance',
                 element: finance,
             },
             {
                 path: 'products/add',
                 element: AddProduct,
+            },
+            {
+                path: 'products/:id',
+                element: EditProduct,
             },
         ]
     },
