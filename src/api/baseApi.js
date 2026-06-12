@@ -6,8 +6,8 @@ const BaseApi = {
     return data
   },
 
-  getById: async (resource, id, queryString = "") => {
-    const { data } = await api.get(`${resource}/${id}?${queryString}`)
+  getById: async (resource, id, queryString) => {
+    const { data } = await api.get(`${resource}/${id}?${queryString}`);
     return data
   },
 
@@ -21,7 +21,7 @@ const BaseApi = {
   },
 
   update: async (resource, id, payload) => {
-    const { data } = await api.put(`${resource}/${id}`, payload)
+    const { data } = await api.put(`${resource}/${id}`, payload);    
     return data
   },
 
@@ -30,10 +30,7 @@ const BaseApi = {
     return data
   },
 
-  bulkUpdate: async (resource, payload) => {
-    const { data } = await api.put(resource, payload)
-    return data
-  },
+
 
 
 

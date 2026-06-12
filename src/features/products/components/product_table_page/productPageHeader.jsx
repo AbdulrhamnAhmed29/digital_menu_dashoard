@@ -1,4 +1,4 @@
-import SectionModal from "../../categories/components/SectionsModal";
+import SectionModal from "../../../categories/components/SectionsModal";
 import { FolderPlus, PlusCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ function ProductPageHeader({ setIsSectionOpen, isSectionOpen, addSection, catego
                         Products Management Dashboard
                     </p>
                 </div>
-
                 {/* Header Action Buttons */}
                 <div className="flex items-center gap-3">
                     <button

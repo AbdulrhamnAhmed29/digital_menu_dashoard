@@ -9,7 +9,6 @@ export const useGetProducts = (id) => {
     const [page, setPage] = useState(1);
     const [searchItem, setSearchItem] = useState("");
     const [debouncedSearch, setDebouncedSearch] = useState("");
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearch(searchItem);
@@ -19,21 +18,22 @@ export const useGetProducts = (id) => {
     }, [searchItem]);
     const search = debouncedSearch.trim();
 
-    // ======== products query===========
+    // ======== PRODUCTS QUERY ===========
     const { data: productsList, isLoading, isError, isFetching } = useQuery({
         queryKey: ["products", page, search],
         queryFn: () => productsservices.getProducts({ page, search }),
         placeholderData: keepPreviousData,
-
     });
 
-    // ========= one product query ==========
+    // ======== ONE PRODUCTS QUERY ===========
     const { data: oneProduct, isLoading: oneProductLoading, isError: oneProductError } = useQuery({
         queryKey: ["oneProduct", id],
-        queryFn: () => productsservices.getProducts(id),
+        queryFn: () => productsservices.getOneProduct(id),
         enabled: !!id
     });
+    
 
+    // ========  PRODUCTS SIZES  ===========
     const { data: productsSizes } = useQuery({
         queryKey: ["productsSizes"],
         queryFn: productsSizeServices.getProductsSizes
@@ -55,7 +55,7 @@ export const useGetProducts = (id) => {
         setSearchItem,
 
         // === ONE PRODUCT DATA ===
-        oneProduct: oneProduct?.data,
+        oneProduct: oneProduct,
         oneProductLoading,
         oneProductError,
 

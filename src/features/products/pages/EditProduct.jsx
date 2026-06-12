@@ -1,8 +1,8 @@
-//  =========React_Hook_Form=========== 
+import React from 'react'
 import { useForm, FormProvider } from "react-hook-form";
-import ProductForm from "../components/product_form/ProductForm";
+import ProductForm from '../components/product_form/ProductForm';
 
-const AddProductForm = () => {
+function EditProduct() {
 
     // ======== DEFAULT VALUES OF IBPUTS ========
     const methods = useForm({
@@ -14,19 +14,20 @@ const AddProductForm = () => {
             prices: [{ products_size: "", price: "" }],
         }
     });
-    const mode = "create"
+    const mode = "update"
 
     // ======== DESTRACURING DATA FROM REACH HOOK FORM ========
-    const { handleSubmit, formState: { isSubmitting } } = methods
+    const { handleSubmit, reset, formState: { isSubmitting } } = methods
+
     return (
         <FormProvider {...methods}>
             <ProductForm
                 handleSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
                 mode={mode}
-                reset={""}
+                reset={reset}
             />
         </FormProvider>
-    );
-};
-export default AddProductForm;
+    )
+}
+export default EditProduct
