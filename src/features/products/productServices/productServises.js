@@ -9,7 +9,7 @@ export const productsservices = {
 
   // ===== GET ONE PRODUCT ====
   getOneProduct: async (id) => {
-    const queryString = "populate[prices][populate][products_size]=*&[populate][menu_section]=true";
+    const queryString = "populate[prices][populate][products_size]=*&[populate][menu_section]=true&[populate][Image]=true";
     const res = await BaseApi.getById("/products", id, queryString);
     return res.data
   },
