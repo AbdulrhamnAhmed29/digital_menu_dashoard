@@ -2,19 +2,26 @@ import { ImagePlus } from 'lucide-react';
 import React from 'react'
 import { useFormContext } from 'react-hook-form';
 
-function ProductImageUpload({imageUrl}) {
+function ProductImageUpload({ imageUrl, mode }) {
     const { register, watch, formState: { errors } } = useFormContext()
+    const STRAPI_URL = "http://localhost:1337";
+    const currantImage = imageUrl ? `${STRAPI_URL}${imageUrl}` : null
 
-//    ========= wselected image =====
+    //    ========= wselected image =====
     const selectedImage = watch("image");
+    //    =========  image =====
+
     const imagePreview = selectedImage && selectedImage[0]
         ? URL.createObjectURL(selectedImage[0])
-        : imageUrl;
+        : currantImage;
+    const isImage = imagePreview || currantImage;
+    const isCreate = mode === "create"
+
     return (
         <div>
             <div className="space-y-2 border-t border-white/5 pt-5">
                 <label className="text-zinc-300 text-sm font-semibold">صورة المنتج</label>
-                {!imagePreview ? (
+                {isCreate && !isImage ? (
                     <div className="relative group flex flex-col items-center justify-center border-2 border-dashed border-white/10 hover:border-amber-500/40 bg-zinc-950/40 p-6 rounded-xl cursor-pointer transition-all duration-300">
                         <input
                             {...register("image")}

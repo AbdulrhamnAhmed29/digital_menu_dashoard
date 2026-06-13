@@ -44,6 +44,7 @@ export const useProductMutation = () => {
     const updateProduct = useMutation({
         mutationFn: async ({ formData, id, data }) => {
             const imageRes = await productsservices.createProductImage(formData);
+            
             const imageId = imageRes?.data[0].id
             return (id, data) => productsservices(id, {
                 data: {

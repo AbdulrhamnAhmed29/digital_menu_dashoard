@@ -17,7 +17,6 @@ import { useParams } from 'react-router-dom'
 function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
     //  === PRODUCT ID ====
     const id = useParams().id;
-    console.log(id);
 
 
     //  ======== DESTRACTRUNG DATA FROM HOOKS =========
@@ -29,11 +28,10 @@ function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
     const sectionsList = sections || [];
     const Size = productsSizes || [];
     const currantProduct = oneProduct;
+    const imageUrl = currantProduct?.Image?.formats?.small?.url || currantProduct?.Image?.formats?.thumbnail?.url
     // ==== MODE OF PAGES ====
     // const isCreate = mode === "create";
     const isUpdate = mode === "update";
- 
-
 
     useEffect(() => {
         if (isUpdate) {
@@ -56,12 +54,25 @@ function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
         if (data.image && data.image[0]) {
             formData.append("files", data.image[0]);
         }
-        addFunction({ formData, data });
-        // =======alert functions======== 
-        showSuccessAlert(
-            `تمت إضافة ${data.Title || data.title} بنجاح`,
-            "تم إدراج المنتج الجديد في قائمة المنيو الفاخرة."
-        );
+        if (isUpdate) {
+            console.log("this update page");
+            updateProduct({ formData, id, data })
+            // =======alert functions======== 
+            showSuccessAlert(
+                `تمت تحديث ${data.Title || data.title} بنجاح`,
+                "تم تحديث المنتج  في قائمة المنيو الفاخرة."
+            );
+        } else {
+            addFunction({ formData, data });
+            // =======alert functions======== 
+            showSuccessAlert(
+                `تمت إضافة ${data.Title || data.title} بنجاح`,
+                "تم إدراج المنتج الجديد في قائمة المنيو الفاخرة."
+            );
+            console.log("this else page");
+
+        }
+      
     };
     return (
         <form
@@ -90,6 +101,8 @@ function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
 
             {/* =========Product Image=========== */}
             <ProductImageUpload
+                imageUrl={imageUrl}
+                mode={mode}
             />
             {/* Submit Button */}
             <button
