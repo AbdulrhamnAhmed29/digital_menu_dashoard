@@ -17,7 +17,8 @@ export const useGetProducts = (id) => {
         return () => clearTimeout(timer);
     }, [searchItem]);
     const search = debouncedSearch.trim();
-
+    const [section, setSection] = useState("")
+    
     // ======== PRODUCTS QUERY ===========
     const { data: productsList, isLoading, isError, isFetching } = useQuery({
         queryKey: ["products", page, search],
@@ -31,7 +32,7 @@ export const useGetProducts = (id) => {
         queryFn: () => productsservices.getOneProduct(id),
         enabled: !!id
     });
-    
+
 
     // ========  PRODUCTS SIZES  ===========
     const { data: productsSizes } = useQuery({
@@ -53,6 +54,7 @@ export const useGetProducts = (id) => {
         //==== SEARCH STATE ===
         search,
         setSearchItem,
+        setSection,
 
         // === ONE PRODUCT DATA ===
         oneProduct: oneProduct,
