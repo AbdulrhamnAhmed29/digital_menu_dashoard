@@ -10,6 +10,7 @@ function ProductImageUpload({ imageUrl, mode }) {
     //    ========= wselected image =====
     const selectedImage = watch("image");
     //    =========  image =====
+    
 
     const imagePreview = selectedImage && selectedImage[0]
         ? URL.createObjectURL(selectedImage[0])
@@ -21,7 +22,7 @@ function ProductImageUpload({ imageUrl, mode }) {
         <div>
             <div className="space-y-2 border-t border-white/5 pt-5">
                 <label className="text-zinc-300 text-sm font-semibold">صورة المنتج</label>
-                {isCreate && !isImage ? (
+                {isCreate && !isImage ? 
                     <div className="relative group flex flex-col items-center justify-center border-2 border-dashed border-white/10 hover:border-amber-500/40 bg-zinc-950/40 p-6 rounded-xl cursor-pointer transition-all duration-300">
                         <input
                             {...register("image")}
@@ -39,7 +40,7 @@ function ProductImageUpload({ imageUrl, mode }) {
                             <p className="text-zinc-600 text-[10px]">PNG, JPG, WEBP (الحد الأقصى 5 ميجا)</p>
                         </div>
                     </div>
-                ) : (
+                : (
                     <div className="relative w-full max-h-64 rounded-xl overflow-hidden border border-white/10 bg-zinc-950 flex items-center justify-center group shadow-inner">
                         <img
                             src={imagePreview}

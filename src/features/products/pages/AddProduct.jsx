@@ -3,7 +3,6 @@ import { useForm, FormProvider } from "react-hook-form";
 import ProductForm from "../components/product_form/ProductForm";
 
 const AddProductForm = () => {
-
     // ======== DEFAULT VALUES OF IBPUTS ========
     const methods = useForm({
         defaultValues: {
@@ -15,7 +14,6 @@ const AddProductForm = () => {
         }
     });
     const mode = "create"
-
     // ======== DESTRACURING DATA FROM REACH HOOK FORM ========
     const { handleSubmit, formState: { isSubmitting } } = methods
     return (

@@ -13,28 +13,29 @@ import { useProductMutation } from "../../productsHooks/useProductMutation";
 import { useSectionGet } from "../../../categories/hooks/useSection_Get";
 import { showSuccessAlert } from '../../../../shared/Alert'
 import { useParams } from 'react-router-dom'
+import Loading from '../../../../shared/Loading'
 
 function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
     //  === PRODUCT ID ====
     const id = useParams().id;
 
-
     //  ======== DESTRACTRUNG DATA FROM HOOKS =========
-    const { productsSizes, oneProduct } = useGetProducts(id);
-    const { addFunction, updateProduct } = useProductMutation();
+    const { productsSizes, oneProduct, oneProductLoading } = useGetProducts(id);
+    const { addFunction, updateProduct, addFunctionOfDuplicate } = useProductMutation();
     const { sections } = useSectionGet();
 
-    //  ======== TO SAVE FROM ERROR BTING LOADING ========= 
+    //  === TO SAVE FROM ERROR BTING LOADING ==
     const sectionsList = sections || [];
     const Size = productsSizes || [];
-    const currantProduct = oneProduct;
-    const imageUrl = currantProduct?.Image?.formats?.small?.url || currantProduct?.Image?.formats?.thumbnail?.url
-    // ==== MODE OF PAGES ====
-    // const isCreate = mode === "create";
-    const isUpdate = mode === "update";
 
+    // === DATA OF CURRANT PRODUCT ====
+    const currantProduct = oneProduct;
+    const currantImageId = currantProduct?.Image?.id
+    const imageUrl = currantProduct?.Image?.formats?.small?.url || currantProduct?.Image?.formats?.thumbnail?.url
+
+    // === THIS TO RESET DATA FOR FORM FROM CURRANT PRODUCT ====
     useEffect(() => {
-        if (isUpdate) {
+        if (isUpdate || isDuplicate) {
             reset({
                 Title: currantProduct?.Title,
                 Description: currantProduct?.Description,
@@ -47,32 +48,59 @@ function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
                 })
             })
         }
-    }, [isUpdate, currantProduct])
+    }, [currantProduct])
+
+    // ==== MODE OF PAGES ====
+    const isCreate = mode === "create";
+    const isUpdate = mode === "update";
+    const isDuplicate = mode === "duplicate"
+
+    // ====== IS LOADING =====
+    if (oneProductLoading) {
+        return <Loading />
+    };
 
     const onSubmit = async (data) => {
         const formData = new FormData();
+        let hasFormData = false;
+        // ==== CHECK IS FORM DATA ====
         if (data.image && data.image[0]) {
             formData.append("files", data.image[0]);
-        }
+            hasFormData = true
+        };
+        // ==== SEND DATA TO UPDATE FUCTION ====
         if (isUpdate) {
-            console.log("this update page");
-            updateProduct({ formData, id, data })
-            // =======alert functions======== 
+            // ==== SEND DATA TO HOOK ====
+            updateProduct({
+                formData: hasFormData ? formData : null,
+                id: id,
+                data: { ...data, image: currantImageId }
+            })
+            // === ALERT TO UPDATE ===
             showSuccessAlert(
                 `تمت تحديث ${data.Title || data.title} بنجاح`,
-                "تم تحديث المنتج  في قائمة المنيو الفاخرة."
+                "تم تحديث المنتج الجديد في قائمة المنيو الفاخرة."
             );
-        } else {
+        }
+        // ==== SEND DATA TO CREATE FUCTION ====
+        else if (isCreate) {
             addFunction({ formData, data });
-            // =======alert functions======== 
             showSuccessAlert(
                 `تمت إضافة ${data.Title || data.title} بنجاح`,
                 "تم إدراج المنتج الجديد في قائمة المنيو الفاخرة."
             );
-            console.log("this else page");
-
         }
-      
+        else {
+            addFunctionOfDuplicate({
+                formData: hasFormData ? formData : null,
+                data: { ...data, image: currantImageId }
+            });
+            showSuccessAlert(
+                `تمت إضافة ${data.Title || data.title} بنجاح`,
+                "تم إدراج المنتج الجديد في قائمة المنيو الفاخرة."
+            );
+        }
+
     };
     return (
         <form
@@ -84,10 +112,11 @@ function ProductForm({ handleSubmit, isSubmitting, mode, reset }) {
             {/* ============Header================ */}
             <div className="text-right border-b border-white/5 pb-4">
                 <h1 className="text-2xl md:text-3xl font-black bg-gradient-to-l from-stone-100 via-amber-200 to-amber-500 bg-clip-text text-transparent">
-                    إضافة منتج جديد للمنيو (Add New Product)
+                    {isCreate || isDuplicate ? "إضافة منتج جديد للمنيو (Add New Product)" : "تحديث منتج   (Edit Product)"}
                 </h1>
                 <p className="text-stone-500 text-[10px] mt-1 tracking-widest uppercase font-medium">
-                    Add a new product to the menu
+                    {isCreate || isDuplicate ? "  Add a new product to the menu" : "  Edit  product in the menu"}
+
                 </p>
             </div>
             {/* ============info inputs===========  */}
