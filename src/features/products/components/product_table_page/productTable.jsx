@@ -4,7 +4,7 @@ import { showDeleteConfirmAlert } from '../../../../shared/Alert';
 import { Link } from 'react-router-dom';
 
 function ProductTable({ products, deleteFunction, }) {
-    const STRAPI_URL = "http://localhost:1337";
+    const STRAPI_URL = "https://digitalmenu-backend-7ch4.onrender.com/api/";
     const getPriceForSize = (pricesMatrix, sizeName) => {
         const priceObj = pricesMatrix?.find(
             (p) => p.products_size?.size?.toLowerCase() === sizeName.toLowerCase()

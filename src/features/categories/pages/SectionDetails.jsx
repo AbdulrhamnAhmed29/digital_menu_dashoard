@@ -8,7 +8,7 @@ function SectionDetails() {
     const { findOne, isLoading, error } = useSectionGet(id);
 
 
-    const STRAPI_BASE_URL = "http://localhost:1337";
+    const STRAPI_BASE_URL = "https://digitalmenu-backend-7ch4.onrender.com/api/";
 
     if (isLoading) {
         return (
