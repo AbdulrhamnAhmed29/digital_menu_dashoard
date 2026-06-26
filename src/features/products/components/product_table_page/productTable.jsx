@@ -4,7 +4,6 @@ import { showDeleteConfirmAlert } from '../../../../shared/Alert';
 import { Link } from 'react-router-dom';
 
 function ProductTable({ products, deleteFunction, }) {
-    const STRAPI_URL = "https://digitalmenu-backend-7ch4.onrender.com/api/";
     const getPriceForSize = (pricesMatrix, sizeName) => {
         const priceObj = pricesMatrix?.find(
             (p) => p.products_size?.size?.toLowerCase() === sizeName.toLowerCase()
@@ -58,7 +57,7 @@ function ProductTable({ products, deleteFunction, }) {
                                                 <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/10 bg-stone-950/40 shadow-inner">
                                                     {product.Image ? (
                                                         <img
-                                                            src={`${STRAPI_URL}${product.Image.formats?.small?.url || product.Image.formats?.thumbnail?.url}`}
+                                                            src={`${product.Image.formats?.small?.url || product.Image.formats?.thumbnail?.url}`}
                                                             alt={product.Title}
                                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ease-out"
                                                         />

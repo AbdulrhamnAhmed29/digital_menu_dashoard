@@ -29,12 +29,12 @@ const SignInForm = () => {
   })
 
   const onSubmit = (data) => {
+    console.log(data); 
     loginMutation.mutate(data)
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-right">
-      {/* حقل البريد الإلكتروني */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-zinc-300 mr-1">
           البريد الإلكتروني 
@@ -43,7 +43,6 @@ const SignInForm = () => {
           <input
             {...register('identifier')}
             type="email"
-            // تصميم الحقل: داكن، حدود نحيفة غامقة، تتوهج بالذهبي عند الفوكس، مع padding لليمين للأيقونة
             className="w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3.5 text-zinc-100 placeholder:text-zinc-600 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] pr-12 transition-all duration-300"
             placeholder="admin@pizzaking.com"
           />
@@ -54,7 +53,6 @@ const SignInForm = () => {
         )}
       </div>
 
-      {/* حقل كلمة المرور */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-zinc-300 mr-1">
           كلمة المرور السرية
@@ -66,7 +64,6 @@ const SignInForm = () => {
             className="w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3.5 text-zinc-100 placeholder:text-zinc-600 focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] pr-12 transition-all duration-300"
             placeholder="••••••••"
           />
-          {/* زر إظهار/إخفاء الباسورد */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -81,13 +78,11 @@ const SignInForm = () => {
         )}
       </div>
 
-      {/* الزر الرئيسي: تدرج ذهبي فخم (Gradient) مع تأثير hover يقلب التدرج، وتوهج سفلي (Shadow) */}
       <button
         type="submit"
         disabled={loginMutation.isLoading}
         className="w-full group relative flex justify-center items-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-[#AA8A2E] via-[#D4AF37] to-[#AA8A2E] py-4 px-6 text-sm font-bold text-black shadow-[0_10px_20px_rgba(212,175,55,0.2)] hover:shadow-[0_10px_30px_rgba(212,175,55,0.4)] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.98]"
       >
-        {/* طبقة بيضاء خفيفة تظهر عند الـ Hover لتعطي لمعاناً */}
         <div className="absolute inset-0 bg-white/10 translate-y-full transition-transform duration-300 group-hover:translate-y-0"></div>
         
         {loginMutation.isLoading ? (
@@ -100,7 +95,6 @@ const SignInForm = () => {
         )}
       </button>
 
-      {/* رسالة الخطأ: تصميم داكن بلمسة حمراء */}
       {loginMutation.isError && (
         <div className="p-4 bg-red-950/30 border border-red-900/50 rounded-xl flex items-center gap-3 mt-4">
           <AlertTriangle className="h-5 w-5 text-red-400 flex-shrink-0" />
