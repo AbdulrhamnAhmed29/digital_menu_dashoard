@@ -17,7 +17,6 @@ export const useGetProducts = (id) => {
         return () => clearTimeout(timer);
     }, [searchItem]);
     const search = debouncedSearch.trim();
-    const [section, setSection] = useState("")
     
     // ======== PRODUCTS QUERY ===========
     const { data: productsList, isLoading, isError, isFetching } = useQuery({
@@ -54,7 +53,6 @@ export const useGetProducts = (id) => {
         //==== SEARCH STATE ===
         search,
         setSearchItem,
-        setSection,
 
         // === ONE PRODUCT DATA ===
         oneProduct: oneProduct,

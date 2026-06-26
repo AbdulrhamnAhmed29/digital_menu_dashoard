@@ -9,7 +9,7 @@ const EditProduct = lazy(() => import("./features/products/pages/EditProduct"));
 const DuplicateProduct = lazy(() => import("./features/products/pages/DuplicateProduct"))
 const Categories = lazy(() => import('./features/categories/pages/Sections'));
 const sectionDetails = lazy(() => import('./features/categories/pages/SectionDetails'));
-const Offers = lazy(() => import('./pages/Offers'));
+const Offers = lazy(() => import('./features/offers/pages/Offers'));
 const finance = lazy(() => import('./pages/Finance'));
 
 

@@ -8,7 +8,6 @@ function SectionDetails() {
     const { findOne, isLoading, error } = useSectionGet(id);
 
 
-    const STRAPI_BASE_URL = "http://localhost:1337";
 
     if (isLoading) {
         return (
@@ -95,7 +94,7 @@ function SectionDetails() {
                         {products?.map((product) => {
                             const sortedPrices = product.prices?.sort((a, b) => a.price - b.price);
                             const startingPrice = sortedPrices?.[0]?.price;
-                            const imageUrl = product.Image?.url ? `${STRAPI_BASE_URL}${product.Image.url}` : 'https://via.placeholder.com/300';
+                            const imageUrl = product.Image?.url ? `${product.Image.url}` : 'https://via.placeholder.com/300';
 
                             return (
                                 <div key={product.id} className="bg-[#000] rounded-xl overflow-hidden border border-zinc-900 flex flex-col justify-between group hover:border-amber-500/30 transition-all duration-300 shadow-2xl">

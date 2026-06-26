@@ -9,4 +9,8 @@ export const CATEGORIES = {
     BEST_SELLER: "الاكثر مبيعا (Best Sellers)",
 }
 
+export const OFFER = {
+    SIZE: "medium"
+}
+
 
