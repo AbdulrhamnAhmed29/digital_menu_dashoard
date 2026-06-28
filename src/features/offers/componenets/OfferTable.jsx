@@ -13,11 +13,9 @@ const TABLE_HEADERS = [
 ];
 
 export default function OfferTable({ offersData = [],  deleteOffer }) {
-    console.log(offersData);
-
     return (
         <div>
-            <div className="w-full overflow-hidden rounded-[2rem] border border-white/[0.05] bg-transparent backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+            <div className="w-full overflow-hidden rounded-[2rem] mt-5 border border-white/[0.05] bg-transparent backdrop-blur-sm shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
                 <div className="overflow-x-auto">
                     {offersData.length === 0 ? (
                         <div className="p-12 text-center text-stone-500 text-sm font-medium">

@@ -19,5 +19,13 @@ export const offerServices = {
         const res = await BaseApi.getAll("offers-prices?populate=*");
         return res.data
     },
-
+    getOneOffer: async (id) => {
+        const queryString = "populate=*"
+        const res = await BaseApi.getById("offers-prices", id, queryString);
+        return res
+    },
+    getConstantOffer: async () => {
+        const res = await BaseApi.getAll("offers");
+        return res.data
+    },
 }

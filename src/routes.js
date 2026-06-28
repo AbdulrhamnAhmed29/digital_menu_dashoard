@@ -7,13 +7,16 @@ const Products = lazy(() => import('./features/products/pages/Products'));
 const AddProduct = lazy(() => import('./features/products/pages/AddProduct'));
 const EditProduct = lazy(() => import("./features/products/pages/EditProduct"));
 const DuplicateProduct = lazy(() => import("./features/products/pages/DuplicateProduct"))
+
+// =======sections routes===== 
 const Categories = lazy(() => import('./features/categories/pages/Sections'));
 const sectionDetails = lazy(() => import('./features/categories/pages/SectionDetails'));
+
+// =======offers routes===== 
 const Offers = lazy(() => import('./features/offers/pages/Offers'));
-const finance = lazy(() => import('./pages/Finance'));
-
-
-
+const updateOffer = lazy(() => import("./features/offers/pages/EditOffers"))
+const notFound = lazy(() => import("./pages/NotFound"));
+const addOffer = lazy(()=>import("./features/offers/pages/AddOffers"))
 
 export const routes = [
     {
@@ -48,9 +51,14 @@ export const routes = [
                 element: Offers,
             },
             {
-                path: 'finance',
-                element: finance,
+                path: 'offers/:id',
+                element: updateOffer,
             },
+            {
+                path: 'addoffers',
+                element: addOffer,
+            },
+
             {
                 path: 'products/add',
                 element: AddProduct,
@@ -63,10 +71,14 @@ export const routes = [
                 path: 'products/:id',
                 element: EditProduct,
             },
+            {
+                path: 'notFound',
+                element: notFound,
+            },
         ]
     },
     {
         path: '*',
-        redirect: '/login'
+        redirect: '/notFound'
     }
 ]

@@ -8,6 +8,7 @@ import { useOfferMutation } from "../hooks/useOfferMutation.js/useOfferMutation"
 const Offers = () => {
   const { offersIsLoading, offerIsError, offers, } = useGetOffers();
   const { deleteOffer, isDeleting, deleteError, } = useOfferMutation();
+  const mode = "show"
 
   // ================= IS LOADING ===================
   if (offersIsLoading) return <Loading />;
@@ -19,7 +20,7 @@ const Offers = () => {
     <div className="p-6">
       {/* ============== Header =========== */}
       <header>
-        <OfferHeader />
+        <OfferHeader mode={mode} />
       </header>
       {/* ============== Main ============= */}
       <main dir="rtl">
